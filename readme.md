@@ -12,6 +12,10 @@ The scene and script will both automatically be opened for editing, and the scri
 
 ![alt text](assets/scene_structure.png)
 
+Additionally, there are options to disable creation of the wrapping folder, or the script.
+
+![alt text](assets/creation_ui.png)
+
 ## How to Use
 
 This addon is not currently in the Godot Asset Library, so if you want to use this addon you will need to download from github. The easiest way to do this is to use the `Code -> Download Zip` option. Drag the 'addons' folder into your project, or just grab the 'create_actor' folder and move it into your own 'addons' folder.

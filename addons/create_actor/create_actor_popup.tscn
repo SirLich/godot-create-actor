@@ -5,10 +5,10 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjgl7"]
 bg_color = Color(0.211765, 0.239216, 0.290196, 1)
 
-[node name="CreateActorPopup" type="Popup" node_paths=PackedStringArray("create_button", "cancel_button", "actor_line_edit")]
+[node name="CreateActorPopup" type="Popup" node_paths=PackedStringArray("create_button", "cancel_button", "actor_line_edit", "create_folder", "create_script")]
 title = "Create"
 initial_position = 1
-size = Vector2i(320, 120)
+size = Vector2i(370, 195)
 visible = true
 borderless = false
 always_on_top = true
@@ -17,6 +17,8 @@ script = ExtResource("1_qjgl7")
 create_button = NodePath("Root/MarginContainer/Container/HBoxContainer/CreateButton")
 cancel_button = NodePath("Root/MarginContainer/Container/HBoxContainer/CancelButton")
 actor_line_edit = NodePath("Root/MarginContainer/Container/LineEdit")
+create_folder = NodePath("Root/MarginContainer/Container/CreateFolder")
+create_script = NodePath("Root/MarginContainer/Container/CreateScript")
 
 [node name="Root" type="Panel" parent="."]
 anchors_preset = 15
@@ -53,6 +55,15 @@ placeholder_text = "new actor"
 [node name="Control" type="Control" parent="Root/MarginContainer/Container"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="CreateFolder" type="CheckBox" parent="Root/MarginContainer/Container"]
+layout_mode = 2
+button_pressed = true
+text = "Create Folder"
+
+[node name="CreateScript" type="CheckBox" parent="Root/MarginContainer/Container"]
+layout_mode = 2
+text = "Create Script"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Root/MarginContainer/Container"]
 layout_mode = 2
