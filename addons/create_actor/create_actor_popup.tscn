@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://kooj48w3d6nc"]
+
+[ext_resource type="Script" uid="uid://dedpoylf8arqt" path="res://addons/create_actor/create_actor_popup.gd" id="1_qjgl7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjgl7"]
+bg_color = Color(0.211765, 0.239216, 0.290196, 1)
+
+[node name="CreateActorPopup" type="Popup" node_paths=PackedStringArray("create_button", "cancel_button", "actor_line_edit")]
+title = "Create"
+initial_position = 1
+size = Vector2i(320, 120)
+visible = true
+borderless = false
+always_on_top = true
+unfocusable = true
+script = ExtResource("1_qjgl7")
+create_button = NodePath("Root/MarginContainer/Container/HBoxContainer/CreateButton")
+cancel_button = NodePath("Root/MarginContainer/Container/HBoxContainer/CancelButton")
+actor_line_edit = NodePath("Root/MarginContainer/Container/LineEdit")
+
+[node name="Root" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qjgl7")
+
+[node name="MarginContainer" type="MarginContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Container" type="VBoxContainer" parent="Root/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BasePathLabel" type="Label" parent="Root/MarginContainer/Container"]
+layout_mode = 2
+text = "Actor name:"
+
+[node name="LineEdit" type="LineEdit" parent="Root/MarginContainer/Container"]
+layout_mode = 2
+placeholder_text = "new actor"
+
+[node name="Control" type="Control" parent="Root/MarginContainer/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Root/MarginContainer/Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="CreateButton" type="Button" parent="Root/MarginContainer/Container/HBoxContainer"]
+layout_mode = 2
+text = "Create"
+
+[node name="CancelButton" type="Button" parent="Root/MarginContainer/Container/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
