@@ -11,13 +11,13 @@ func select_type(args : Array):
 	
 func select_name(type : String):
 	if not type:
+		EditorInterface.get_editor_toaster().push_toast("Type invalid", EditorToaster.SEVERITY_WARNING)
 		return
 		
 	var new_popup = popup_packed.instantiate()
 	new_popup.configure(_path, type)
-	
 	EditorInterface.popup_dialog_centered(new_popup)
-	
+
 func _popup_menu(paths: PackedStringArray) -> void:
 	if paths.size() == 1:
 		_path = paths[0]

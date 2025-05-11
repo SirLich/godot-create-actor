@@ -29,3 +29,15 @@ Godot doesn't have the concept of an "actor". Everything is just nodes and scene
 The "actor" flow defined in this plugin just automates the standard practice of creating a folder, scene, and GDScript file, all with a shared name.
 
 You can use it for creating actors, components, levels, etc. Really anything that matches this format.
+
+# Version History
+
+## 1.1.0
+
+- Added option to create `C#` scripts as well as GDScript files
+- Added option to change the location of the created actor.
+- Added ClassName automatically to GDScript template
+
+## 1.0.0
+
+Initial release of the plugin, offering basic 'Create Actor' support.

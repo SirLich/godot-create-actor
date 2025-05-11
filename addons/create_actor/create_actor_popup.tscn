@@ -1,24 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://kooj48w3d6nc"]
+[gd_scene load_steps=5 format=3 uid="uid://kooj48w3d6nc"]
 
 [ext_resource type="Script" uid="uid://dedpoylf8arqt" path="res://addons/create_actor/create_actor_popup.gd" id="1_qjgl7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjgl7"]
 bg_color = Color(0.211765, 0.239216, 0.290196, 1)
 
-[node name="CreateActorPopup" type="Popup" node_paths=PackedStringArray("create_button", "cancel_button", "actor_line_edit", "create_folder", "create_script")]
+[sub_resource type="Image" id="Image_qjgl7"]
+data = {
+"data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 184, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 181, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 73, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 181, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 0, 0, 0, 0, 0, 0, 0, 0, 224, 224, 224, 181, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 255, 224, 224, 224, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": "RGBA8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_slkm0"]
+image = SubResource("Image_qjgl7")
+
+[node name="CreateActorPopup" type="Popup" node_paths=PackedStringArray("create_button", "cancel_button", "path_line_edit", "actor_line_edit", "create_folder", "script_type", "select_folder_button")]
 title = "Create"
 initial_position = 1
-size = Vector2i(370, 195)
+size = Vector2i(370, 315)
 visible = true
+unresizable = false
 borderless = false
 always_on_top = true
 unfocusable = true
+popup_window = false
 script = ExtResource("1_qjgl7")
 create_button = NodePath("Root/MarginContainer/Container/HBoxContainer/CreateButton")
 cancel_button = NodePath("Root/MarginContainer/Container/HBoxContainer/CancelButton")
+path_line_edit = NodePath("Root/MarginContainer/Container/HBoxContainer2/PathLineEdit")
 actor_line_edit = NodePath("Root/MarginContainer/Container/LineEdit")
 create_folder = NodePath("Root/MarginContainer/Container/CreateFolder")
-create_script = NodePath("Root/MarginContainer/Container/CreateScript")
+script_type = NodePath("Root/MarginContainer/Container/ScriptType")
+select_folder_button = NodePath("Root/MarginContainer/Container/HBoxContainer2/SelectFolder")
 
 [node name="Root" type="Panel" parent="."]
 anchors_preset = 15
@@ -44,6 +60,21 @@ theme_override_constants/margin_bottom = 15
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PathLabel" type="Label" parent="Root/MarginContainer/Container"]
+layout_mode = 2
+text = "Path:"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Root/MarginContainer/Container"]
+layout_mode = 2
+
+[node name="PathLineEdit" type="LineEdit" parent="Root/MarginContainer/Container/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectFolder" type="Button" parent="Root/MarginContainer/Container/HBoxContainer2"]
+layout_mode = 2
+icon = SubResource("ImageTexture_slkm0")
+
 [node name="BasePathLabel" type="Label" parent="Root/MarginContainer/Container"]
 layout_mode = 2
 text = "Actor name:"
@@ -52,22 +83,36 @@ text = "Actor name:"
 layout_mode = 2
 placeholder_text = "new actor"
 
-[node name="Control" type="Control" parent="Root/MarginContainer/Container"]
+[node name="OptionsLabel" type="Label" parent="Root/MarginContainer/Container"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 0
+text = "Options:"
 
 [node name="CreateFolder" type="CheckBox" parent="Root/MarginContainer/Container"]
 layout_mode = 2
 button_pressed = true
 text = "Create Folder"
 
-[node name="CreateScript" type="CheckBox" parent="Root/MarginContainer/Container"]
+[node name="ScriptType" type="OptionButton" parent="Root/MarginContainer/Container"]
 layout_mode = 2
-text = "Create Script"
+size_flags_horizontal = 0
+selected = 0
+item_count = 3
+popup/item_0/text = "GDScript"
+popup/item_0/id = 0
+popup/item_1/text = "C#"
+popup/item_1/id = 0
+popup/item_2/text = "None"
+popup/item_2/id = 2
+
+[node name="Control2" type="Control" parent="Root/MarginContainer/Container"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Root/MarginContainer/Container"]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 8
 theme_override_constants/separation = 50
 
 [node name="CreateButton" type="Button" parent="Root/MarginContainer/Container/HBoxContainer"]
