@@ -32,6 +32,10 @@ You can use it for creating actors, components, levels, etc. Really anything tha
 
 # Version History
 
+## 1.2.0
+
+ - Added keyboard shortcut to open the create_actor menu.
+
 ## 1.1.0
 
 - Added option to create `C#` scripts as well as GDScript files

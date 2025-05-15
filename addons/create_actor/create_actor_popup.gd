@@ -20,8 +20,8 @@ var _type = ""
 var _path = ""
 ## The file dialog popup
 var _active_file_dialog : EditorFileDialog
-
-func _ready() -> void:
+	
+func _ready() -> void:	
 	initialize_settings()
 	initialize_checkbox_values()
 	
@@ -154,7 +154,6 @@ func create_actor():
 		return
 	
 	var dir_path = path_line_edit.text + "/"
-	print(dir_path)
 	
 	if should_create_folder():
 		dir_path = dir_path + "/" + get_actor_name_underscore()

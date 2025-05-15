@@ -90,13 +90,12 @@ text = "Options:"
 
 [node name="CreateFolder" type="CheckBox" parent="Root/MarginContainer/Container"]
 layout_mode = 2
-button_pressed = true
 text = "Create Folder"
 
 [node name="ScriptType" type="OptionButton" parent="Root/MarginContainer/Container"]
 layout_mode = 2
 size_flags_horizontal = 0
-selected = 0
+selected = 2
 item_count = 3
 popup/item_0/text = "GDScript"
 popup/item_0/id = 0
