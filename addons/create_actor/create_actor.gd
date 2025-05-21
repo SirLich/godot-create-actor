@@ -17,7 +17,7 @@ func select_name(type : String):
 	var new_popup = _popup_packed.instantiate()
 	new_popup.configure(_path, type)
 	EditorInterface.popup_dialog_centered(new_popup)
-
+	
 func _popup_menu(paths: PackedStringArray) -> void:
 	if paths.size() == 1:
 		_path = paths[0]
