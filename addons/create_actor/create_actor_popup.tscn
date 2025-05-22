@@ -83,11 +83,6 @@ text = "Actor name:"
 layout_mode = 2
 placeholder_text = "new actor"
 
-[node name="OptionsLabel" type="Label" parent="Root/MarginContainer/Container"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Options:"
-
 [node name="CreateFolder" type="CheckBox" parent="Root/MarginContainer/Container"]
 layout_mode = 2
 button_pressed = true

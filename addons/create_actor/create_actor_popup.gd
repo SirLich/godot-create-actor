@@ -21,7 +21,7 @@ var _path = ""
 ## The file dialog popup
 var _active_file_dialog : EditorFileDialog
 	
-func _ready() -> void:	
+func _ready() -> void:
 	initialize_settings()
 	initialize_checkbox_values()
 	
