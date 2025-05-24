@@ -5,8 +5,8 @@ extends Popup
 @export_group("Nodes")
 @export var create_button : Button
 @export var cancel_button : Button
-
 @export var path_line_edit : LineEdit
+
 @export var actor_line_edit : LineEdit
 
 @export var create_folder : CheckBox

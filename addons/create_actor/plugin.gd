@@ -32,40 +32,73 @@ func open_script_changed(script : Script):
 	if not get_base_editor().lines_edited_from.is_connected(code_changed):
 		get_base_editor().lines_edited_from.connect(code_changed)
 
+func locate_first_node_with_script_in_open_scene(node: Node, script : Script):
+	## Initial case 
+	if not node:
+		node = EditorInterface.get_edited_scene_root()
+		
+	if node.get_script() == script:
+		return node
+		
+	for child in node.get_children():
+		return locate_first_node_with_script_in_open_scene(child, script)
+	
 func code_changed(from: int, to: int):
 	if is_dragging:
 		await get_tree().process_frame
 		
 		var result = from - to
-		prints(from, to, result)
 		
-		if result == 1 or result == -1:
-			var line = get_base_editor().get_line(to)
-			if can_transform(line):
-				get_base_editor().set_line(to, transform_to_export_var(line))
+		if result == -1:
+			var line = get_base_editor().get_line(from)
 			
-			
+			var export_info := get_export_info(line)
+			if result.is_valid:
+				get_base_editor().set_line(from, export_info.result)
+				await get_tree().process_frame
+				
+				var current_script = EditorInterface.get_script_editor().get_current_script()
+				var node = locate_first_node_with_script_in_open_scene(null, current_script)
+				
+				node[export_info.var_name] = export_info.exportable_path
+				
 		is_dragging = false
 
-func can_transform(line: String) -> bool:
-	return line.contains("@onready")
+
+class ExportInfo:
+	var is_valid : bool
+	var var_name : String
+	var type_hint : String
+	var path : String
+	var exportable_path : NodePath
+	var result : String
 	
-func transform_to_export_var(line):
+## Example: actor_line_edit = NodePath("Root/MarginContainer/Container/LineEdit")
+func get_export_info(line) -> ExportInfo:
 	# Example transformation:
 	# @onready var select_folder: Button = $Root/MarginContainer/Container/HBoxContainer2/SelectFolder
 	# @export var select_folder : Button
 	
+	var export_info = ExportInfo.new()
+
+
 	var regex = RegEx.new()
 	regex.compile("@onready var (.+): (.+) = (.+)")
 	var result := regex.search(line)
 	if result.get_group_count() != 3:
-		return line # Abort
+		export_info.is_valid = false
+		return export_info # Abort
 	
-	var var_name = result.get_string(1)
-	var type_hint = result.get_string(2)
-	var path = result.get_string(3)
 	
-	return "@export var %s : %s" % [var_name, type_hint]
+	export_info.var_name = result.get_string(1)
+	export_info.type_hint = result.get_string(2)
+	export_info.path = result.get_string(3)
+	export_info.exportable_path = NodePath(export_info.path)
+	
+	export_info.result = "@export var %s : %s" % [export_info.var_name, export_info.type_hint]
+	export_info.is_valid = true
+
+	return export_info
 		
 
 func _exit_tree() -> void:
