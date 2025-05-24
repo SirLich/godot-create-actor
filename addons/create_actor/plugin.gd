@@ -1,3 +1,5 @@
+@tool
+
 extends EditorPlugin
 
 var create_actor_plugin_script = preload("res://addons/create_actor/create_actor.gd")
@@ -6,7 +8,6 @@ var create_actor_plugin : EditorContextMenuPlugin
 var randomizer_plugin_script = preload("res://addons/create_actor/create_randomizer.gd")
 var randomizer_plugin : EditorContextMenuPlugin
 var is_dragging = false
-
 
 func get_base_editor() -> CodeEdit:
 	return EditorInterface.get_script_editor().get_current_editor().get_base_editor()
@@ -39,10 +40,34 @@ func code_changed(from: int, to: int):
 		prints(from, to, result)
 		
 		if result == 1 or result == -1:
-			get_base_editor().remove_line_at(to)
+			var line = get_base_editor().get_line(to)
+			if can_transform(line):
+				get_base_editor().set_line(to, transform_to_export_var(line))
+			
 			
 		is_dragging = false
+
+func can_transform(line: String) -> bool:
+	return line.contains("@onready")
+	
+func transform_to_export_var(line):
+	# Example transformation:
+	# @onready var select_folder: Button = $Root/MarginContainer/Container/HBoxContainer2/SelectFolder
+	# @export var select_folder : Button
+	
+	var regex = RegEx.new()
+	regex.compile("@onready var (.+): (.+) = (.+)")
+	var result := regex.search(line)
+	if result.get_group_count() != 3:
+		return line # Abort
+	
+	var var_name = result.get_string(1)
+	var type_hint = result.get_string(2)
+	var path = result.get_string(3)
+	
+	return "@export var %s : %s" % [var_name, type_hint]
 		
+
 func _exit_tree() -> void:
 	remove_context_menu_plugin(create_actor_plugin)
 	remove_context_menu_plugin(randomizer_plugin)
