@@ -32,7 +32,7 @@ func open_script_changed(script : Script):
 	if not get_base_editor().lines_edited_from.is_connected(code_changed):
 		get_base_editor().lines_edited_from.connect(code_changed)
 
-func locate_first_node_with_script_in_open_scene(node: Node, script : Script):
+func locate_first_node_with_script_in_open_scene(node: Node, script : Script) -> Node:
 	## Initial case 
 	if not node:
 		node = EditorInterface.get_edited_scene_root()
@@ -42,9 +42,11 @@ func locate_first_node_with_script_in_open_scene(node: Node, script : Script):
 		
 	for child in node.get_children():
 		return locate_first_node_with_script_in_open_scene(child, script)
+		
+	return null
 	
 func code_changed(from: int, to: int):
-	if is_dragging:
+	if is_dragging and Input.is_key_pressed(KEY_SHIFT):
 		await get_tree().process_frame
 		
 		var if_correct_lines_edited = from - to == -1
@@ -53,15 +55,22 @@ func code_changed(from: int, to: int):
 			
 			var export_info := get_export_info(line)
 			if export_info.is_valid:
+				
+				## Update script
 				get_base_editor().set_line(from, export_info.result)
 				
+				## Refresh script
 				var current_script = EditorInterface.get_script_editor().get_current_script()
 				var node = locate_first_node_with_script_in_open_scene(null, current_script)
-				
 				current_script.source_code = get_base_editor().text
-				ResourceSaver.save(current_script)
+				current_script.reload(true)
 				
-				node[export_info.var_name] = export_info.exportable_path
+				## Refresh scene
+				EditorInterface.save_scene()
+				#node[] = 
+				node.set(export_info.var_name, node.get_node(export_info.exportable_path))
+				EditorInterface.mark_scene_as_unsaved()
+
 		
 		is_dragging = false
 

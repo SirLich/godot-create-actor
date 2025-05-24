@@ -32,6 +32,10 @@ You can use it for creating actors, components, levels, etc. Really anything tha
 
 # Version History
 
+## 1.4.0
+
+ - Add ability to use @export vars with drag+drop
+
 ## 1.3.0
 
  - Added 'Create AudioStreamRandomizer support
