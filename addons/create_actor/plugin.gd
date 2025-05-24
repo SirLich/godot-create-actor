@@ -47,23 +47,23 @@ func code_changed(from: int, to: int):
 	if is_dragging:
 		await get_tree().process_frame
 		
-		var result = from - to
-		
-		if result == -1:
+		var if_correct_lines_edited = from - to == -1
+		if if_correct_lines_edited:
 			var line = get_base_editor().get_line(from)
 			
 			var export_info := get_export_info(line)
-			if result.is_valid:
+			if export_info.is_valid:
 				get_base_editor().set_line(from, export_info.result)
-				await get_tree().process_frame
 				
 				var current_script = EditorInterface.get_script_editor().get_current_script()
 				var node = locate_first_node_with_script_in_open_scene(null, current_script)
 				
-				node[export_info.var_name] = export_info.exportable_path
+				current_script.source_code = get_base_editor().text
+				ResourceSaver.save(current_script)
 				
+				node[export_info.var_name] = export_info.exportable_path
+		
 		is_dragging = false
-
 
 class ExportInfo:
 	var is_valid : bool
@@ -93,7 +93,7 @@ func get_export_info(line) -> ExportInfo:
 	export_info.var_name = result.get_string(1)
 	export_info.type_hint = result.get_string(2)
 	export_info.path = result.get_string(3)
-	export_info.exportable_path = NodePath(export_info.path)
+	export_info.exportable_path = NodePath(export_info.path.lstrip("$"))
 	
 	export_info.result = "@export var %s : %s" % [export_info.var_name, export_info.type_hint]
 	export_info.is_valid = true
