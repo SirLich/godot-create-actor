@@ -5,6 +5,7 @@ extends Control
 @export var start : Button
 @export var clear : Button
 @export var apply : Button
+@export var label : Label
 
 ## Maps between node_path (e.g., Parent/child), and tracked value
 var position_map = {}
@@ -31,6 +32,11 @@ func scene_changed(root : Node):
 	editor_scene_root = root
 
 func clear_positions():
+	label.visible = false
+	start.visible = true
+	clear.visible = false
+	apply.visible = false
+	
 	position_map = {}
 	
 func on_start():
@@ -39,6 +45,13 @@ func on_start():
 		return
 	
 	clear_positions()
+
+	label.text = "Rebasing: " + editor_scene_root.name
+	label.visible = true
+	start.visible = false
+	clear.visible = true
+	apply.visible = true
+	
 	gather_positions(editor_scene_root)
 	
 	print(position_map)
