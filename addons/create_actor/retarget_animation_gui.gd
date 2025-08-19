@@ -84,13 +84,29 @@ func apply_animation_retargeting():
 func process_animations(player : AnimationPlayer):
 	var library = player.get_animation_library("")
 	for animation_key in library.get_animation_list():
-		process_animation(library.get_animation(animation_key))
+		process_animation(player, library.get_animation(animation_key))
 
-func process_animation(animation : Animation):
+func justify_nodepath(player: AnimationPlayer, abs_nodepath: NodePath) -> NodePath:
+	# Node referenced in scene
+	var node := editor_scene_root.get_node(abs_nodepath)
+	if node == null:
+		push_error("Node not found: %s" % abs_nodepath)
+		return abs_nodepath
+
+	# The root node that animations resolve against
+	var anim_root: Node = player.get_node(player.root_node)
+	
+	# Compute relative path from anim_root to node
+	var relative_path := anim_root.get_path_to(node)
+
+	# Append the property that we know we’re animating
+	return NodePath("%s:position" % relative_path)
+	
+func process_animation(player : AnimationPlayer, animation : Animation):
 	for node_path in position_map.keys():
 		var value = position_map[node_path]
 		
-		var justified_nodepath = NodePath("../" + str(node_path) + ":position")
+		var justified_nodepath = justify_nodepath(player, node_path)
 		var track_index = animation.find_track(justified_nodepath, Animation.TrackType.TYPE_VALUE)
 		
 		if track_index >= 0:
