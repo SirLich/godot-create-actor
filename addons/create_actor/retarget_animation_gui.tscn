@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://brj2vpevetuug"]
+
+[ext_resource type="Script" uid="uid://bqbpcfe05yhab" path="res://addons/create_actor/retarget_animation_gui.gd" id="1_ypjcb"]
+
+[node name="Rebase Animation" type="Control" node_paths=PackedStringArray("start", "clear", "apply", "label")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ypjcb")
+start = NodePath("VBoxContainer/HBoxContainer/Start")
+clear = NodePath("VBoxContainer/HBoxContainer/Clear")
+apply = NodePath("VBoxContainer/HBoxContainer/Apply")
+label = NodePath("VBoxContainer/Label")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Caches the current node values, and prepares the AnimationPlayer for rebasing. Generally you shold use this AFTER playing the 'RESET' animation of the AnimationPlayer you're rebasing, so the node values have sensible values."
+text = "Start Rebasing"
+
+[node name="Clear" type="Button" parent="VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+tooltip_text = "Cancels the operation."
+text = "Cancel"
+
+[node name="Apply" type="Button" parent="VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+tooltip_text = "Applies the pending operation. This will take the difference between the nodes values when starting the operation, and now. For example if you moved a node up by 15px, then all key-frames related to this node will also be shifted up by 15px. This is what is meant by rebasing."
+text = "Apply"
