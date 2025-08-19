@@ -28,7 +28,6 @@ func _ready() -> void:
 	editor_plugin.scene_changed.connect(scene_changed)
 
 func scene_changed(root : Node):
-	print("Scene changed!")
 	editor_scene_root = root
 
 func clear_positions():
@@ -41,7 +40,7 @@ func clear_positions():
 	
 func on_start():
 	if not editor_scene_root:
-		EditorInterface.get_editor_toaster().push_toast("Cannot track: No open scene.")
+		EditorInterface.get_editor_toaster().push_toast("Cannot track: No open scene.", EditorToaster.SEVERITY_WARNING)
 		return
 	
 	clear_positions()
@@ -54,7 +53,6 @@ func on_start():
 	
 	gather_positions(editor_scene_root)
 	
-	print(position_map)
 
 func gather_positions(node : Node):
 	if "position" in node:
@@ -123,10 +121,10 @@ func process_animation(player : AnimationPlayer, animation : Animation):
 		var track_index = animation.find_track(justified_nodepath, Animation.TrackType.TYPE_VALUE)
 		
 		if track_index >= 0:
-			print("Worked: " + str(justified_nodepath))
 			process_animation_track(animation, track_index, node_path, value)
 		else:
-			print("Didn't work " + str(justified_nodepath))
+			EditorInterface.get_editor_toaster().push_toast("Failed to rebase track: %" % str(justified_nodepath), EditorToaster.SEVERITY_WARNING)
+
 			
 func process_animation_track(animation : Animation, track_index : int, node_path : NodePath, value):
 	for key_index in animation.track_get_key_count(track_index):
