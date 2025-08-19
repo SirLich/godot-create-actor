@@ -90,11 +90,14 @@ func process_animation(animation : Animation):
 	for node_path in position_map.keys():
 		var value = position_map[node_path]
 		
-		var justified_nodepath = NodePath(str(node_path) + ":position")
+		var justified_nodepath = NodePath("../" + str(node_path) + ":position")
 		var track_index = animation.find_track(justified_nodepath, Animation.TrackType.TYPE_VALUE)
 		
 		if track_index >= 0:
+			print("Worked: " + str(justified_nodepath))
 			process_animation_track(animation, track_index, node_path, value)
+		else:
+			print("Didn't work " + str(justified_nodepath))
 			
 func process_animation_track(animation : Animation, track_index : int, node_path : NodePath, value):
 	for key_index in animation.track_get_key_count(track_index):
@@ -104,7 +107,7 @@ func process_animation_track(animation : Animation, track_index : int, node_path
 		# The current value, of the node
 		var current_node_value = editor_scene_root.get_node(node_path).position
 		
-		var difference = value - current_node_value
+		var difference = current_node_value - value
 		var desired_value = current_key_value + difference
 		
 		animation.track_set_key_value(track_index, key_index, desired_value)
