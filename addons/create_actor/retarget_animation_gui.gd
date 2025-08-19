@@ -149,8 +149,10 @@ func process_animation(player : AnimationPlayer, animation : Animation):
 				continue
 			
 			var property_name = prop_info["name"]
-			var value = node[property_name]
 			var node_path = editor_scene_root.get_path_to(node)
+			
+			var value = cached_root.get_node(node_path)[property_name]
+
 			var justified_nodepath = justify_nodepath(player, node_path, property_name)
 			var track_index = animation.find_track(justified_nodepath, Animation.TrackType.TYPE_VALUE)
 			
@@ -160,7 +162,7 @@ func process_animation(player : AnimationPlayer, animation : Animation):
 			else:
 				pass
 				#EditorInterface.get_editor_toaster().push_toast("Failed to rebase track: " + str(justified_nodepath), EditorToaster.SEVERITY_WARNING)
-			
+	
 func process_animation_track(animation : Animation, track_index : int, node_path : NodePath, value):
 	for key_index in animation.track_get_key_count(track_index):
 		# Value = The old value (saved earlier)
@@ -172,4 +174,11 @@ func process_animation_track(animation : Animation, track_index : int, node_path
 		var difference = current_node_value - value
 		var desired_value = current_key_value + difference
 		
+		print("---")
+		print("value " + str(value))
+		print("current_key_value " + str(current_key_value))
+		print("current_node_value " + str(current_node_value))
+		print("difference " + str(difference))
+		print("desired_value " + str(desired_value))
+
 		animation.track_set_key_value(track_index, key_index, desired_value)
