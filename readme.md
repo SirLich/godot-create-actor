@@ -32,6 +32,10 @@ You can use it for creating actors, components, levels, etc. Really anything tha
 
 # Version History
 
+## 1.5.0
+
+ - Adds dock for animation rebasing
+
 ## 1.4.0
 
  - Add ability to use @export vars with drag+drop

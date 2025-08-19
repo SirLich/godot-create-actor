@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://brj2vpevetuug"]
+[gd_scene load_steps=2 format=3 uid="uid://dje1xoydsnwbo"]
 
-[ext_resource type="Script" uid="uid://bqbpcfe05yhab" path="res://addons/create_actor/retarget_animation_gui.gd" id="1_ypjcb"]
+[ext_resource type="Script" path="res://addons/create_actor/retarget_animation_gui.gd" id="1_ypjcb"]
 
 [node name="Rebase Animation" type="Control" node_paths=PackedStringArray("start", "clear", "apply", "label")]
 layout_mode = 3
