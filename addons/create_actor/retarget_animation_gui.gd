@@ -157,28 +157,24 @@ func process_animation(player : AnimationPlayer, animation : Animation):
 			var track_index = animation.find_track(justified_nodepath, Animation.TrackType.TYPE_VALUE)
 			
 			if track_index >= 0:
-				process_animation_track(animation, track_index, node_path, value)
-				EditorInterface.get_editor_toaster().push_toast("Rebased track: " + str(justified_nodepath), EditorToaster.SEVERITY_INFO)
+				
+				process_animation_track(animation, track_index, node_path, value, property_name)
 			else:
 				pass
 				#EditorInterface.get_editor_toaster().push_toast("Failed to rebase track: " + str(justified_nodepath), EditorToaster.SEVERITY_WARNING)
 	
-func process_animation_track(animation : Animation, track_index : int, node_path : NodePath, value):
+func process_animation_track(animation : Animation, track_index : int, node_path : NodePath, value, property_name : String):
 	for key_index in animation.track_get_key_count(track_index):
 		# Value = The old value (saved earlier)
 		# The current value, in the key
 		var current_key_value = animation.track_get_key_value(track_index, key_index)
 		# The current value, of the node
-		var current_node_value = editor_scene_root.get_node(node_path).position
+		var current_node_value = editor_scene_root.get_node(node_path)[property_name]
 		
+		if typeof(value) != typeof(current_node_value):
+			continue
+
 		var difference = current_node_value - value
 		var desired_value = current_key_value + difference
-		
-		print("---")
-		print("value " + str(value))
-		print("current_key_value " + str(current_key_value))
-		print("current_node_value " + str(current_node_value))
-		print("difference " + str(difference))
-		print("desired_value " + str(desired_value))
 
 		animation.track_set_key_value(track_index, key_index, desired_value)
